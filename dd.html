@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class TodoList extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    todos: [],
+                    inputValue: ''
+                };
+            }
+    
+            handleInputChange = (event) => {
+                this.setState({ inputValue: event.target.value });
+            }
+    
+            addTodo = () => {
+                if (this.state.inputValue.trim() !== '') {
+                    this.setState({
+                        todos: [...this.state.todos, { text: this.state.inputValue, completed: false }],
+                        inputValue: ''
+                    });
+                }
+            }
+    
+            toggleTodo = (index) => {
+                const updatedTodos = [...this.state.todos];
+                updatedTodos[index].completed = !updatedTodos[index].completed;
+                this.setState({ todos: updatedTodos });
+            }
+    
+            deleteTodo = (index) => {
+                const updatedTodos = [...this.state.todos];
+                updatedTodos.splice(index, 1);
+                this.setState({ todos: updatedTodos });
+            }
+    
+            render() {
+                return (
+                    <>
+                        <h1>React To-Do List</h1>
+                        <div>
+                            <input
+                                type="text"
+                                value={this.state.inputValue}
+                                onChange={this.handleInputChange}
+                            />
+                            <button onClick={this.addTodo}>Add</button>
+                        </div>
+                        <div>
+                            {this.state.todos.map((todo, index) => (
+                                <ul key={index}>
+                                    <input
+                                        type="checkbox"
+                                        checked={todo.completed}
+                                        onChange={() => this.toggleTodo(index)}
+                                    />
+                                    <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                                        {todo.text}
+                                    </span>
+                                    <button onClick={() => this.deleteTodo(index)}>Delete</button>
+                                </ul>
+                            ))}
+                        </div>
+                    </>
+                );
+            }
+        }
+    
+        ReactDOM.render(
+            <TodoList />,
+            document.getElementById('root')
+        );
+    </script>
+    
+    
+</body>
+</html>

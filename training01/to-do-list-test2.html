@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,21 +13,22 @@
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <!--
         props : 읽기 전용
         state : 내부 값 변경 가능 (클래스형 컴포넌트에서는 사용 가능하지만, 함수형 컴포넌트에서는 사용 불가)
                 함수형 컴포넌트에서 state를 관리할 수 있는 기능은 useState라는 hooks.-->
-    <input type="checkbox" unchecked/><label style="text-decoration-line: line-through;">dfsf</label>
+    <input type="checkbox" unchecked /><label style="text-decoration-line: line-through;">dfsf</label>
     <div id="root"></div>
     <script type="text/babel"> /*
-    -- JSX: ReactElement를 정의하는 간편한 방법 -> ReactElement를 xml 문법 형식으로 정의
-    -- babel: 여러가지 랭귀지들을 하나로 컴파일할 수 있게 해주는 역할 -> 트랜스 파일링 툴 (ES6+, E5 next 문법을 ES5문법으로 변환해 주는 도구) 
-    
-    이 안에 들어가는 모든 엘리먼트를 ReactDOM에서 관리하기 떄문에 이것을 루트(root)DOM 혹은 루트 node라고 부른다.
-    일반적으로 react로 구현된 애플리케이션은 하나의 루트 DOM이 있다.
-    단, 리액트를 기존 앱에 통합하려는 경우 원하는 만큼 독립된 루트 DOM노드를 가질 수도 있다.*/
-        const {useState} = React;
+-- JSX: ReactElement를 정의하는 간편한 방법 -> ReactElement를 xml 문법 형식으로 정의
+-- babel: 여러가지 랭귀지들을 하나로 컴파일할 수 있게 해주는 역할 -> 트랜스 파일링 툴 (ES6+, E5 next 문법을 ES5문법으로 변환해 주는 도구) 
+ 
+이 안에 들어가는 모든 엘리먼트를 ReactDOM에서 관리하기 떄문에 이것을 루트(root)DOM 혹은 루트 node라고 부른다.
+일반적으로 react로 구현된 애플리케이션은 하나의 루트 DOM이 있다.
+단, 리액트를 기존 앱에 통합하려는 경우 원하는 만큼 독립된 루트 DOM노드를 가질 수도 있다.*/
+        const { useState } = React;
         /*함수형 컴포넌트*/
         function MyTodo(props) {
             /*
@@ -36,26 +38,51 @@
             배열을 리턴하는데 첫 번째 원소는 상태 값을 저장할 변수이고,
             두번 째 원소는 해당 상태 값을 갱신할 때 사용할 수 있는 함수입니다.
             그리고 setState() 함수에 인자로 해당 상태의 초기 값을 넘길 수 있습니다.*/
-            const [todos, settodos] = useState("하드코딩 값 넣어보기");
+            const [todos, settodos] = useState("기본값");
             const [textDecorationLine, setTextDecorationLine] = useState("none"); //line-through(취소선) or none
             const [checked, setChecked] = useState(false);
-            const style = {
-                    textDecorationLine : checked? /*true*/"line-through":/*false*/"none"
-                };
 
-            const onChangeCheaked = ()=> setChecked(!checked);
+            /*style*/
+            const lineStyle = {
+                textDecorationLine: checked ? /*true*/"line-through" :/*false*/"none"
+            };
+            const backStyle = {
+                width: 500,
+                height: 700,
+                backgroundColor: "#DDECCA"
+            }
+            const todoStyle = {
+                width: 460,
+                height: 600,
+                backgroundColor: "#F7FEEF",
+                margin: "auto"
+            }
+
+            const onChangeCheaked = () => setChecked(!checked);
+            const onClickTodos = () => settodos();
+            const onClickDelete = () => todos.splice;
+            const todoAdd = () => settodos(this.todos);
 
             console.log(checked);
-            return(
+            return (
                 <>
-                    <label>
-                        <input type="checkbox" checked={checked} onChange={onChangeCheaked}/>
-                        <span style={style}>{todos}</span>
-                    </label>
+                    <div style={backStyle}>
+                        <h1>To-do-List</h1>
+                        <div style={todoStyle}>
+                            <label id="getTodo">
+                                <input type="checkbox" checked={checked} onChange={onChangeCheaked} />
+                                <span style={lineStyle}>{todos}</span>
+                            </label>
+                            <input type="submit" onClick={onClickDelete} value="삭제" />
+                        </div>
+                        <input type="text"></input>
+                        <button onChange={onClickTodos}>등록</button>
+                    </div>
                 </>
             )
         }
-        ReactDOM.createRoot(document.getElementById("root")).render(<MyTodo/>);
+        ReactDOM.createRoot(document.getElementById("root")).render(<MyTodo />);
     </script>
 </body>
+
 </html>

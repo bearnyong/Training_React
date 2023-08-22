@@ -1,4 +1,4 @@
-1. <input type="submit" value="삭제"/>
+<input type="submit" value="삭제"/>
 
 01 JSX
 ---------------------------------------------------
