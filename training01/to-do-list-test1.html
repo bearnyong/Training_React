@@ -15,7 +15,26 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        class MyTodoList extends React.Component {
+        /*
+        -- 클래스형 컴포넌트 사용 방법
+        1) 앞글자는 대문자로
+        2) 닫기 태그 필수
+        3) 클래스명과 태그명을 동일하게*/
+        class MyTodoList extends React.Component { //1)대문자시작(MyTodoList)
+            /*
+            컴포넌트를생성할 때 가장 먼저 호출되는 생성자 함수이다.*/
+            constructor(props) { //뿌려주기 위한 props
+                //부모 컴포넌트로부터 전달받은 props를 부모 클래스의 생성자에 전달하면서 컴포넌트를 생성
+                super(props); //자바와 다르게 반드시 명시가 되어야 한다.
+
+                /*
+                -- 생성자 안에서 state를 사용하는 방법
+                1. state는 this.을 명시해야 한다.
+                2. 이름은 반드시 state여야 한다.
+                3. state에 저장되는 값의 형태는 반드시 Object 리터럴 형태로 작성해야 한다.*/
+                this.state = {
+                };
+            }
 
             const [todos, settodos] = useState("하드코딩 값 넣어보기");
             const [textDecorationLine, setTextDecorationLine] = useState("none"); //line-through(취소선) or none

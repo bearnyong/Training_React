@@ -1,0 +1,845 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>00. react</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6d5aa7b7-3813-4e0d-ace6-76f3c0dd568b" class="page sans"><header><h1 class="page-title">00. react</h1><p class="page-description"></p></header><div class="page-body"><p id="df60fb3d-4bf7-456e-933f-b0e7b33be6e9" class="">
+</p><p id="fdfe8304-c895-4407-a527-cba164cb8b5f" class="">
+</p><p id="327efb38-caad-47e4-b24f-d8dffb3651fa" class="">00_React사용</p><p id="1e60742b-730a-43fb-8f33-96da85ca1938" class="">React : <a href="https://ko.legacy.reactjs.org/docs/add-react-to-a-website.html">https://ko.legacy.reactjs.org/docs/add-react-to-a-website.html</a></p><figure id="f506b860-5574-4318-833d-4d66f9203eb7"><a href="https://ko.legacy.reactjs.org/docs/add-react-to-a-website.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">웹사이트에 React 추가 – React</div><div class="bookmark-description">A JavaScript library for building user interfaces</div></div><div class="bookmark-href"><img src="https://ko.legacy.reactjs.org/icons/icon-512x512.png?v=f4d46f030265b4c48a05c999b8d93791" class="icon bookmark-icon"/>https://ko.legacy.reactjs.org/docs/add-react-to-a-website.html</div></div><img src="https://legacy.reactjs.org/logo-og.png" class="bookmark-image"/></a></figure><p id="1f15426e-1a5f-463e-9c06-d8ca98164912" class="">Home → 문서 → 웹사이트에 react 추가하기 → 2단계_스크립트 태그 추가하기</p><p id="743cd919-4726-4a9a-b80c-803bf49b55cc" class="">
+</p><pre id="ff999b25-e3c9-49cb-97fe-1e9b46b139e0" class="code"><code>&lt;!-- React를 실행. --&gt;
+&lt;!-- 주의: 사이트를 배포할 때는 &quot;development.js&quot;를 &quot;production.min.js&quot;로 대체하세요. --&gt;
+&lt;script src=&quot;https://unpkg.com/react@18/umd/react.development.js&quot; crossorigin&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/react-dom@18/umd/react-dom.development.js&quot; crossorigin&gt;&lt;/script&gt;
+
+&lt;!-- 만든 React 컴포넌트를 실행. --&gt;
+&lt;script src=&quot;like_button.js&quot;&gt;&lt;/script&gt;</code></pre><p id="f02a78bf-dc2a-4bb3-b650-7aef09ef45e8" class="">
+</p><hr id="15355861-233b-450d-b70c-f231c3a40f55"/><p id="1652f5e0-4b58-4e94-9620-90de35414bed" class="">
+</p><p id="7f29eaec-6923-4b18-8c49-82b84485ab42" class="">01_JS에서 react라이브러리 실행하기</p><ol type="1" id="ffae5e67-3798-4242-9d3c-e08b553e27d2" class="numbered-list" start="1"><li>생성하고자 하는 엘리먼트의 태그</li></ol><ol type="1" id="54439137-fe3d-4561-999f-6e8ed1f24b0b" class="numbered-list" start="2"><li>엘리먼트의 속성</li></ol><ol type="1" id="f7eda4be-a92a-49ca-bc74-04cffaedd57b" class="numbered-list" start="3"><li>자식 노드</li></ol><p id="65c41ab8-6de3-48e1-9fab-03afe3fe6282" class="">
+</p><pre id="55782275-2174-4d30-beaf-e011dc24f52c" class="code"><code>&lt;script type=&quot;text/javascript&quot;&gt;
+	const greetingElement = React.createElement(&quot;h1&quot;,
+	{className: &quot;greeting&quot;, id: &#x27;greeting&#x27;}, //JavaScript에서 지정한 속성으로 key 값 지정해야함... (ex. class(x) className(o))
+	&#x27;hello world!!&#x27;);
+
+	const textElement = React.createElement(&quot;h3&quot;,
+	{id: &quot;name&quot;},
+	&quot;안녕하세요, 호빵맨 입니다.&quot;);
+&lt;/script&gt;</code></pre><p id="0c20e57b-9ad7-4cf3-9c20-264a9f749772" class="">
+</p><p id="dd2cdb41-1ddd-4302-8f2a-6e486b944412" class="">기존의 React 버전(16 이전)에서는 하나의 엘리먼트만 랜더링 하는 것이 가능하였으나,</p><p id="b941e1cf-bf17-43e3-9105-e2fc3fddaa72" class="">이후 버전에서는 배열 랜더링이 가능해졌다.</p><pre id="32582709-8883-4650-8567-e292def86b37" class="code"><code>&lt;script type=&quot;text/javascript&quot;&gt;
+	ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render([greetingElement, textElement]);
+&lt;/script&gt;</code></pre><p id="91612a04-0763-4a3f-a924-b37a98733bf5" class="">
+</p><hr id="9b1b1ad8-0484-4a41-9c0f-e8f09b89b019"/><p id="b3f5d0e1-474f-4c27-9401-548f0cf2d0df" class="">
+</p><p id="64d07b2f-95a3-44bf-9dd3-2146e1616472" class="">02_엘리먼트?</p><p id="08a46d52-68b2-49c8-a7be-5fd0cfd53de5" class="">요소 노드, 어트리뷰트 노드, 텍스트 노드로 만들어지는 가상 dom의 개념</p><p id="3cbc7a9b-4d0e-479a-b2d7-a461f3a6740f" class="">
+</p><p id="6b68855f-c692-4bc5-ba4f-a83b0d6fd1fe" class="">03_컴포넌트?</p><p id="52c9fe65-6021-4440-a6b1-15b72c95e8ab" class="">엘리먼트를 반환하는 개념을 가진 화면의 구성 단위</p><p id="64d9e8b1-0bca-44ce-b89d-db65540f08df" class="">
+</p><hr id="f2703649-e8de-4cdb-8b97-69944b31a975"/><p id="1735dd28-82c0-4bbb-aa61-9c69804fea99" class="">
+</p><p id="a3af2bcf-120e-4052-b723-da70ef918506" class="">
+</p><p id="086f78d7-f68d-48d3-a0bd-f6ec7a751d73" class="">
+</p><p id="37b19473-35d1-4ed0-aac3-2ac3affd659d" class="">함수형 컴포넌트에서만 훅을 사용할 수 있다</p><pre id="649a1456-91ed-47ea-b39b-f0c8783a51d2" class="code"><code>&lt;script type=&quot;text/javascript&quot;&gt;
+	function HelloWorld(){
+       return React.createElement(&quot;h1&quot;, 
+       {classname: &quot;greeting&quot;, id:&quot;test&quot;}, 
+       &quot;hello word function&quot;);
+   };
+
+   ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(React.createElement(HelloWorld));
+&lt;/script&gt;</code></pre><p id="4ae6d5cf-be5d-4832-80a2-ec6c0df98174" class="">
+</p><hr id="735912ee-ba81-4bdb-a224-3f339e41a6e2"/><p id="1966c5c0-cd8a-4147-b578-3b039e88b6bd" class="">
+</p><p id="41448c7c-89a5-4b22-8759-c94fa1aaf49f" class="">createElement를 이용해 엘리먼트를 정의하면 복잡해지며 가독성 또한 좋지 않다.</p><p id="66678da3-fcb7-4c8f-9485-b63bde3c02b0" class="">그렇기에 ReactTeam은 ReactElement를 정의하는 JSX 문법을 제공한다.</p><p id="fe01d031-5112-46a8-94df-dfbcac621cc8" class="">
+</p><p id="6610a633-16c5-4b60-a029-624e5fac8dc0" class="">04_JSX란?</p><p id="8350d681-8c1e-4049-97a5-da7b55024dd3" class="">JavaScript의 확장된 문법으로, ReactElement를 xml 문법 형식으로 정의할 수 있는 방법이다.</p><p id="165924e7-1668-4aaa-a292-55fc0f121c02" class="">단, JSX는 공식적인 자바스크립트 문법은 아니며 바벨이라는 트랜스 파일링 툴이 필요하다.</p><p id="7e69abf7-bb25-496c-ae61-c36384bc3833" class="">
+</p><p id="902ffdb8-fd75-4d58-9736-89088bc96ba9" class="">05_babel이란?</p><p id="7e461a68-ffc4-461a-8bfe-ee6246fe1ec5" class="">여러가지 랭귀지들을 하나로 컴파일할 수 있게 해주는 역할</p><p id="c2b7c114-7477-4d01-b9e0-dd1d494c7ac5" class="">바벨은 ES6+, E5 next 문법을 ES5문법으로 변환해 주는 도구이다.</p><ul id="7f0b09ab-81c0-4240-a27b-94d58ac6dd7f" class="bulleted-list"><li style="list-style-type:disc">이 안에 들어가는 모든 엘리먼트를 ReactDOM에서 관리하기 떄문에 이것을 루트(root)DOM 혹은 루트 node라고 부른다.</li></ul><ul id="7e94d43c-2647-4bac-99fa-bb906c2e2b6a" class="bulleted-list"><li style="list-style-type:disc">일반적으로 react로 구현된 애플리케이션은 하나의 루트 DOM이 있다.</li></ul><ul id="320195de-6a59-4c2b-9e02-6869cfbfc825" class="bulleted-list"><li style="list-style-type:disc">단, 리액트를 기존 앱에 통합하려는 경우 원하는 만큼 독립된 루트 DOM노드를 가질 수도 있다.</li></ul><p id="f5c788ad-198e-4b3e-948b-503b40c68545" class="">
+</p><p id="7e443743-b112-43d4-9e10-8912779522c7" class="">바벨 적용 방법(CDN)</p><ol type="1" id="48c4cc99-e3e1-4750-9ec1-ffb569cfe462" class="numbered-list" start="1"><li>바벨 CDN 구문을 추가한다.<pre id="b1c4e071-0848-4ce6-9f24-216c4f1aac4e" class="code"><code>&lt;!--babel--&gt;
+&lt;script crossorigin src=&quot;https://unpkg.com/@babel/standalone/babel.min.js&quot;&gt;&lt;/script&gt;</code></pre></li></ol><ol type="1" id="65a47279-fb9c-4fad-a1a4-ae0879ceca22" class="numbered-list" start="2"><li>script 태그에 type 속성에 text/babel 속성을 추가한다.<pre id="ff19b1cf-c12e-4fef-90ce-ffe2edda3098" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+&lt;/script&gt;</code></pre></li></ol><p id="8a3f3462-a089-4706-8660-b3f13ba0b830" class="">
+</p><p id="1e186d07-8cd9-48b3-93f3-8a066f781d10" class="">06_JSX 사용 규칙</p><p id="a4102d98-1754-4440-a910-9716e30dcbc3" class="">동일 레벨의 노드들이 연달아 정의되는 경우 문법적인 에러가 발생하게 된다.</p><p id="59a86a9e-7705-41c2-8eb2-09ab963a6a09" class="">여러 형제 레벨의 엘리먼트를 정의해야하는 경우 (div 태그와 같은) 하나의 부모 엘리먼트로 감싸야 하는데 div 요소 같은 실질적인 요소를 사용하지 않으려면 Fragment를 이용할 수 있다. (react 16이전 버전에 추가됨)</p><p id="cb463de5-d234-4f38-931c-d175f0825ee0" class="">
+</p><ol type="1" id="69f01dd8-16f0-4288-975c-668c4a7850b1" class="numbered-list" start="1"><li>최상위 엘리먼트가 두 개 이상이면 에러가 발생한다<pre id="6066e577-5c8d-417a-b5c1-b3515a6ec037" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+		const element = (
+		    &lt;h1&gt;안녕&lt;/h1&gt;
+        &lt;h1&gt;하세요&lt;/h1&gt;
+	  )
+		ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(elemet);
+&lt;/script&gt;</code></pre></li></ol><ol type="1" id="9fac38b9-4f72-49a0-99bd-4f0fd9931176" class="numbered-list" start="2"><li>&lt;div&gt; 태그로 감싸서 하나의 돔트리를 생성할 수 있도록 한다.<pre id="f676d727-f677-4814-a7cd-b48066d6c856" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+		const element = (
+		    &lt;div&gt;
+		        &lt;h1&gt;안녕&lt;/h1&gt;
+            &lt;h1&gt;phone : {user.phone}&lt;/h1&gt;
+        &lt;/div&gt;
+    )
+		ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(elemet);
+&lt;/script&gt;</code></pre></li></ol><ol type="1" id="f61de9ea-d1b4-4378-8779-a8c78ad71323" class="numbered-list" start="3"><li>&lt;React.Fragment&gt;로 감싸서 형식상의 돔 트리상 상위 엘리먼트를 만들어준다.<ul id="b83003c1-c416-483e-b017-89ae0fc82407" class="bulleted-list"><li style="list-style-type:disc">의미없는 태그가 길어진다는 단점</li></ul><pre id="e5ac47b9-e248-47d0-80f2-88a252e87cf9" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+		const elemet = (
+		    &lt;React.Fragment&gt;
+		        &lt;h1&gt;안녕{user.name}&lt;/h1&gt;
+		        &lt;h1&gt;phone : {user.phone}&lt;/h1&gt;
+		    &lt;/React.Fragment&gt;
+    );
+		ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(elemet);
+&lt;/script&gt;</code></pre></li></ol><ol type="1" id="95412504-cbf4-43e4-83cf-f56c5e27944a" class="numbered-list" start="4"><li>ReactLibrary로부터 Fragment 객체만 구조분해 할당을 해주면 React. 을 생략할 수 있다. <ul id="35ead505-d9cb-4b9f-a566-5dbdbc248b1b" class="bulleted-list"><li style="list-style-type:disc">플래그먼트의 축약 표현</li></ul><pre id="bbdea4ca-3862-4565-b221-fece556ed227" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+		const {Fragment} = React;
+    const {name, phone} = user;
+    const elemet = (
+		    &lt;Fragment&gt;
+		        &lt;h1&gt;안녕 {name + &quot;님&quot;}&lt;/h1&gt;
+            &lt;h1&gt;phone : {phone + &quot;로 전화해도 됨?&quot;}&lt;/h1&gt;
+		    &lt;/Fragment&gt;
+    );
+		ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(elemet);
+&lt;/script&gt;</code></pre></li></ol><p id="6ff56859-a6d6-4448-b903-fcd92ab362eb" class="">
+</p><p id="93a13bf8-ad6c-4d1b-ba80-e6f164a903d3" class="">
+</p><p id="44fc4b87-099b-458c-b60d-d0bb841b6897" class="">07_css를 객체로 생성하기</p><pre id="5a1e6fff-603a-43e0-8727-738d856cade0" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+        const style = { //css를 객체로 작성
+            backgroundColor: &#x27;green&#x27;,
+            color: &#x27;white&#x27;,
+            cursor: &#x27;pointe&#x27;,
+            textAlign: &#x27;center&#x27;,
+            padding: 20
+        }
+
+        const element = (
+            &lt;&gt;
+                &lt;h1 style={style}&gt;고민영 팔 모기 물렸음&lt;/h1&gt;
+                &lt;h3&gt;부었다고 하는데 티가 안남&lt;/h3&gt;
+            &lt;/&gt;
+        )
+        ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(element);
+&lt;/script&gt;</code></pre><p id="6248e04b-dbe2-4013-9def-e623184272a9" class="">
+</p><p id="8bb955a4-7cbe-4500-bea9-662aff98d04f" class="">10_클래스형 컴포넌트 (사용자 정의 태그)</p><pre id="5568c9a4-7939-4037-8cec-f56d0d02f371" class="code"><code>&lt;!--
+        01. 클래스형 컴포넌트 (사용자 정의 태그)
+        
+        ES6에서 제공되는 클래스 문법을 이용해 렌더링 될 컴포넌트를 정의하는 방법을 제공한다.
+        render() 함수는 반드시 작성되어야 하며,
+        반환값으로는 렌더링 될 리액트 엘리먼트를 정의한다. (일반적으로 JSX를 사용함)
+
+        JSX만으로도 리액트 엘리먼트를 정의할 수 있지만 클래스형으로 컴포넌트를 작성하게 되면 여러가지 장점이 있다.
+        중복되는 엘리먼트들을 추상화해서 컴포넌트를 작성하고,
+        ★★★작성된 컴포넌트를 재사용하는 것이 리액트가 추구하는 한가지 방향이다.★★★
+
+        컴포넌트를 정의하는 방법은 현재 두 가지 방식을 제공한다.
+        클래스형 컴포넌트와 함수형 컴포넌트이다.
+        사용하는 것은 함수형 컴포넌트가더 간결하고 선언하기도 편하며, 메모리도 덜 사용하기에 더 권자오디는 방식이다.
+        그러나 state 사용 및 라이프 사이클기능, 임의의 메소드 정의 등은 클래스 컴포넌트에서만 사용 가능한 방식이다.
+        이러한 함수형 컴포넌트의 기능적 한계로 훅스(hooks)를 제공하고 있다.
+
+        리액트 팀에서는 함수형 컴포넌트 사용을 권장하고 있으나
+        클래스형 컴포넌트를 없애지 않고 유지하는 방향으로 선택하고 있다.
+--&gt;</code></pre><pre id="a4c8192a-ba2b-4fe6-90af-7157d5b4a812" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+        /*
+        클래스형 컴포넌트 사용법
+        1. 앞글자는 대문자로
+        2. 닫기 태그 필수
+        3. 클래스명과 태그명을 동일하게
+
+        사용자 정의 태그라고 생각을 하면 된다.*/
+        class Title extends React.Component { //1. Title : 대문자로 시작
+            render() {
+                return(
+                    &lt;h1&gt;
+                        Class Component
+                    &lt;/h1&gt; //2. 닫기 태그 필수
+                );
+            }
+        }
+        ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(&lt;Title/&gt;); //2. 닫기 태그 필수, 3. Title 클래스명과 태그명을 동일하게
+&lt;/script&gt;</code></pre><p id="1564364e-c106-4d7f-9b46-e254c4cf9f8e" class="">
+</p><p id="64e49aae-2172-4e20-8faa-94fceafc7ce5" class="">
+</p><p id="53f0332e-b9ab-4cb0-87fb-74d0a172260d" class="">11_함수형 컴포넌트 (사용자 정의 태그)</p><pre id="62a6d598-7b8e-44c6-a776-39f36123a654" class="code"><code>&lt;!--
+        02. 함수형 컴포넌트 (사용자 정의 태그)
+
+        함수형 컴포넌트는 간결하게 작성 가능하다.
+        함수의 반환값으로 ReactElement만 정의해서 반환하면 된다. (일반적으로 JSX 사용)
+
+        함수형 컴포넌트 작성 시 유의 사항은 앞 글자를 대문자로 정의해야 한다는 것이다.
+        사용자 정의 엘리먼트를 이용할 시 &lt;Title/&gt; 이런 형태로 사용하게 되는데,
+        앞글자가 소문자이면 html로 인식하게 되고 존재하지 않는 html 태그 엘리먼트이기 때문에 제대로 그려지지 않는다.
+
+        함수형 컴포넌트의 단점은 state와 라이프사이클 api 사용이 불가능하다는 것이었으나,
+        v16.8부터 hooks를 제공하면서 해당 문제가 해결되었다.
+--&gt;</code></pre><pre id="7d3d2c63-da43-43e1-a43a-a7a640529de5" class="code"><code>&lt;script type=&quot;text/babel&quot;&gt;
+        function Title() {
+            return (
+                &lt;h1&gt;
+                    Function component
+                &lt;/h1&gt;
+            );
+        }
+        ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(&lt;Title/&gt;);
+&lt;/script&gt;</code></pre><p id="b18cb915-1798-4c4b-b031-55404b7b8700" class="">
+</p><p id="88eb59a9-405f-44b5-a762-8012a7f3bae7" class="">
+</p><pre id="58af2ffa-370f-4302-a0fa-fa59b298f9ae" class="code"><code>&lt;!--
+        03. 컴포넌트 합성
+
+        컴포넌트는 자산의 출력에 따른 컴포넌트를 참조할 수 있다.
+        컴포넌트는 재사용 가능한 크기로 작게 유지해야 하며, 순수 함수처럼 작성되어야 한다.
+        순수 함수에 대한 설명은 props 챕터에서 다시 다루게 된다.
+        (* 순수 함수: 외부에 의존되지 않는 함수 (ex. var global = 3; 1+2+global에서 global을 참조하지 않고 순수 값 1+2의 결과만을 가질 수 있는 함수..))
+
+        지금은 단순히 컴포넌트를 생성할 때 다른 컴포넌트를 참조해서 사용하는 것을 살펴보자
+--&gt;</code></pre></div></article></body></html>
